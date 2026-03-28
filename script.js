@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 onComplete: () => {
                     placeholder.style.display = 'none';
                     const frame = document.querySelector('.preview-frame');
-                    frame.innerHTML = '<h2 style="color:white; font-family:Orbitron;">BUILD STATUS: ONLINE</h2>';
+                    frame.innerHTML = '<h2 style="color:#1f2937; font-family:Inter; font-weight:800; letter-spacing:-1px;">BUILD STATUS: ONLINE</h2>';
                 }
             });
         }, 1500);
