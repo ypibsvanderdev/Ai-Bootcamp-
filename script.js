@@ -112,6 +112,69 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // 5. Auth Modal Logic
+    const authModal = document.getElementById('auth-modal');
+    window.toggleAuthModal = () => {
+        const isVisible = authModal.style.display === 'flex';
+        authModal.style.display = isVisible ? 'none' : 'flex';
+    };
+
+    window.switchAuth = () => {
+        const title = document.getElementById('modal-title');
+        title.innerText = title.innerText === 'ASCEND' ? 'CREATE CORE' : 'ASCEND';
+    };
+
+    window.simulateGoogleLogin = () => {
+        const title = document.getElementById('modal-title');
+        title.innerText = "CONNECTING...";
+        
+        setTimeout(() => {
+            loginSuccess("Google AI User");
+        }, 1500);
+    };
+
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            loginSuccess(email.split('@')[0]);
+        });
+    }
+
+    function loginSuccess(name) {
+        // Update UI
+        document.getElementById('auth-buttons').style.display = 'none';
+        document.getElementById('user-profile').style.display = 'flex';
+        document.getElementById('user-name').innerText = name;
+        
+        // Hide landing sections, show dashboard
+        document.getElementById('hero').style.display = 'none';
+        document.getElementById('features').style.display = 'none';
+        document.getElementById('mission').style.display = 'none';
+        document.getElementById('join').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        
+        // Close modal
+        authModal.style.display = 'none';
+        
+        // Scroll to top
+        window.scrollTo(0,0);
+
+        // Terminal Greeting
+        const terminal = document.querySelector('.terminal-view');
+        if (terminal) {
+            const newLine = document.createElement('div');
+            newLine.className = 'terminal-line';
+            newLine.innerText = `> Welcome back, ${name}. Systems initialized.`;
+            terminal.appendChild(newLine);
+        }
+    }
+
+    window.logout = () => {
+        window.location.reload(); 
+    };
 });
 
 // CSS for particles (adding dynamically to satisfy 'tuff' requirements)
